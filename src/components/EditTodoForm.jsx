@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-export default function ToDoForm({ addTodo }) {
-  let [value, setValue] = useState("");
+export default function EditToDoForm({ editTodo, task }) {
+  let [value, setValue] = useState(task.task);
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(value);
+    editTodo(value, task.id);
     setValue = "";
   };
   console.log(value);
@@ -20,7 +20,7 @@ export default function ToDoForm({ addTodo }) {
       />
       <h2>CREATE A TODO</h2>
       <form className="todo-form" onSubmit={handleSubmit}>
-        <label htmlFor="task">What's on your todo list?</label>
+        <label htmlFor="task">Update task</label>
         <input
           type="text"
           id="task"
@@ -29,7 +29,7 @@ export default function ToDoForm({ addTodo }) {
           onChange={(e) => setValue(e.target.value)}
         />
         <label className="category__label">Pick a category</label>
-        <div onClick={chooseCategory} className="category">
+        <div className="category">
           <div className="categories">
             <input
               className="category__radio"
@@ -51,7 +51,7 @@ export default function ToDoForm({ addTodo }) {
             <label htmlFor="personal">Personal</label>
           </div>
         </div>
-        <input type="submit" id="submit__btn" value="Add Todo" />
+        <input type="submit" id="submit__btn" value="Update" />
         <h2>TODO List:</h2>
       </form>
     </main>

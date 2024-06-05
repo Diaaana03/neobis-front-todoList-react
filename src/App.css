@@ -27,12 +27,6 @@ main {
   background: var(--main-bg-color);
 }
 
-.date,
-.hour {
-  font-size: 1.8rem;
-  text-align: right;
-}
-
 .header__text {
   font-size: 3rem;
   display: inline;
@@ -162,6 +156,7 @@ label {
   padding: 10px 10px;
   width: 100%;
   background: none;
+  justify-content: space-between;
 }
 
 .task-result:focus {
@@ -188,24 +183,20 @@ label {
   font-size: 1.5rem;
 }
 
-.task-complete {
-  margin: auto 0;
-  appearance: none;
+.completed {
+  text-decoration: line-through;
   cursor: pointer;
-  border-radius: 50%;
-  aspect-ratio: 1/1;
-  height: 24px;
-  transition: 0.2s all linear;
-  outline: none;
 }
 
-.task-complete:before {
-  content: "";
-  display: block;
-  width: 60%;
-  height: 60%;
-  margin: 5px auto;
-  border-radius: 50%;
+.incompleted {
+  cursor: pointer;
+  display: flex;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .checkbox-blue:checked:before {
