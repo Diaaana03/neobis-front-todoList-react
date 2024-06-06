@@ -1,8 +1,8 @@
 import "./App.css";
-import ToDoWrapper from "./components/ToDoWrapper";
+import ToDoForm from "./components/ToDoForm";
 
 function App() {
-  return <ToDoWrapper />;
+  return <ToDoForm />;
 }
 
 export default App;
