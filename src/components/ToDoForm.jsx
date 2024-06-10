@@ -1,37 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
-import * as React from "react";
-import { pink } from "@mui/material/colors";
-import Radio from "@mui/material/Radio";
 import Task from "./Task";
+import useColor from "../stores/useColor";
 
 export default function Main() {
+  const getBlueColor = useColor((state) => {
+    return state.getBlueColor;
+  });
+  const getPinkColor = useColor((state) => {
+    return state.getPinkColor;
+  });
+
   const [taskValue, setTaskValue] = useState("");
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) ?? []
   );
 
+  const inputRef = useRef();
+  const tasksRef = useRef();
+
   // radio buttons
-
-  function ColorRadioButtons() {
-    const [selectedValue, setSelectedValue] = React.useState("a");
-
-    const handleChange = (event) => {
-      setSelectedValue(event.target.value);
-    };
-
-    const controlProps = (item) => ({
-      checked: selectedValue === item,
-      onChange: handleChange,
-      value: item,
-      name: "color-radio-button-demo",
-      inputProps: { "aria-label": item },
-    });
-  }
 
   let category = "business";
 
-  const inputRef = useRef();
-  const tasksRef = useRef();
+  function chooseCategory(event) {
+    const radioInput = event.target.closest(".category__radio");
+
+    if (radioInput && radioInput.classList.contains("personal-radio")) {
+      category = "personal";
+      getPinkColor();
+    } else {
+      category = "business";
+      getBlueColor();
+    }
+  }
 
   function addTask(event) {
     event.preventDefault();
@@ -65,9 +66,10 @@ export default function Main() {
             type="text"
             id="task"
             placeholder="e.g. get a milk"
+            name="task"
           />
           <label className="category__label">Pick a category</label>
-          <div className="category">
+          <div className="category" onClick={chooseCategory}>
             <div className="categories">
               <input
                 className="category__radio"
@@ -78,6 +80,7 @@ export default function Main() {
               />
               <label htmlFor="business">Business</label>
             </div>
+
             <div className="categories">
               <input
                 className="category__radio personal-radio"
@@ -89,26 +92,28 @@ export default function Main() {
               <label htmlFor="personal">Personal</label>
             </div>
           </div>
-          <input
+          <button
             onClick={addTask}
             type="submit"
-            id="submit__btn"
+            className="submit__btn"
             value="Add Todo"
-          />
-          <h2>TODO List:</h2>
-          <div ref={tasksRef} className="tasks">
-            {tasks.map((task, index) => (
-              <Task
-                key={task.text + index}
-                index={index}
-                tasks={tasks}
-                setTasks={setTasks}
-                post={task.text}
-                category={task.category}
-              />
-            ))}
-          </div>
+          >
+            Add Todo
+          </button>
         </form>
+        <h2>TODO List:</h2>
+        <div ref={tasksRef} className="tasks">
+          {tasks.map((task, index) => (
+            <Task
+              key={task.text + index}
+              index={index}
+              tasks={tasks}
+              setTasks={setTasks}
+              post={task.text}
+              category={task.category}
+            />
+          ))}
+        </div>
       </main>
     </>
   );

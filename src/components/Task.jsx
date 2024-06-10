@@ -4,9 +4,9 @@ export default function Task({ post, category, setTasks, index, tasks }) {
   const taskInputRef = useRef();
 
   function editButton(event) {
+    event.preventDefault();
     const taskContainer = event.target.closest(".task-container");
     const taskInput = taskContainer.querySelector(".task-result");
-    taskInput.disabled = false;
   }
   function deleteButton(event) {
     const deletedTasks = tasks.filter((item, i) => i !== index);
@@ -35,7 +35,6 @@ export default function Task({ post, category, setTasks, index, tasks }) {
           value={post}
           checked={false}
           className="task-result"
-          disabled={true}
           style={{ boxShadow: "inset" }}
         />
         <button onClick={editButton} className="edit">
