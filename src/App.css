@@ -194,6 +194,13 @@ label {
   padding: 5px 20px;
 }
 
+.save {
+  background-color: #8b93ff;
+  color: #fff !important;
+  margin: 0 10px;
+  font-size: 1.5rem;
+}
+
 .edit {
   background-color: #009e60;
   color: #fff !important;

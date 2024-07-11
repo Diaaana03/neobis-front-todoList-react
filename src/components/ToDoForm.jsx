@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Task from "./Task";
 import useColor from "../stores/useColor";
 
@@ -97,6 +97,7 @@ export default function Main() {
             type="submit"
             className="submit__btn"
             value="Add Todo"
+            defaultValue="Add Todo"
           >
             Add Todo
           </button>
